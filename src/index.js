@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
-
 import express from 'express';
 import {} from 'dotenv/config';
 import routes from './routes/index';
