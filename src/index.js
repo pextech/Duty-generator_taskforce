@@ -2,11 +2,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import express from 'express';
 import {} from 'dotenv/config';
+import morgan from 'morgan';
 import routes from './routes/index';
 
 const port = process.env.PORT;
 const app = express();
 
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.json({ extended: false }));
 app.use('/', routes);
