@@ -5,7 +5,7 @@ module.exports = {
     username: process.env.ME,
     password: null,
     database: process.env.DB_USERS,
-    host: '127.0.0.1',
+    host: process.env.HOST,
     port: process.env.DB_PORT,
     dialect: process.env.DIALECT,
   },

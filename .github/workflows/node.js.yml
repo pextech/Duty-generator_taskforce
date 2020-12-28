@@ -29,7 +29,8 @@ jobs:
     - run: npm test
     env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-          DB_USERS: Users 
-          DIALECT: postgres
-          DB_PORT: 5432
-          ME: andela
+          DB_USERS: ${{DB_USERS}} 
+          DIALECT: ${{DIALECT}}
+          DB_PORT: ${{PORT}}
+          ME: ${{ME}}
+          HOST: ${{HOST}}
