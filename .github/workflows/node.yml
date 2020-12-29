@@ -27,9 +27,3 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
-    env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-          DB_USERS: Users 
-          DIALECT: postgres
-          DB_PORT: 5432
-          ME: andela
