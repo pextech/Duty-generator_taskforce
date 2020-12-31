@@ -2,11 +2,11 @@ import {} from 'dotenv/config';
 
 module.exports = {
   development: {
-    username: 'andela',
+    username: process.env.ME,
     password: null,
-    database: 'dutydb',
-    host: '127.0.0.1',
-    port: '5432',
+    database: process.env.DB_NAME,
+    host: process.env.HOST,
+    port: process.env.DB_PORT,
     dialect: 'postgres',
   },
   test: {
