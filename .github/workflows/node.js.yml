@@ -58,10 +58,10 @@ jobs:
     - run: npm test
     - run: npm run build
     - run: npm run cover  
-    env:
-        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        DB_NAME: ${{secrets.DB_NAME}
-        DB_PORT: ${{secrets.DB_PORT}
-        ME: ${{secrets.ME}
-        HOST: ${{secrets.HOST}
-        DIALECT: ${{secrets.DIALECT}   
+     env:
+         NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+         DB_NAME: ${{secrets.DB_NAME}
+         DB_PORT: ${{secrets.DB_PORT}
+         ME: ${{secrets.ME}
+         HOST: ${{secrets.HOST}
+         DIALECT: ${{secrets.DIALECT}   
