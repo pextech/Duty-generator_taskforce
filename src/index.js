@@ -5,7 +5,7 @@ import {} from 'dotenv/config';
 import morgan from 'morgan';
 import routes from './routes/index';
 
-const port = process.env.PORT;
+const port = process.env.PORT || 5000;
 const app = express();
 
 app.use(morgan('dev'));
