@@ -6,7 +6,7 @@
   "scripts": {
     "build": "babel src/. --out-dir build",
     "start": "node build/index.js",
-    "test": "mocha src/tests/ --require @babel/register --timeout 3000 --exit",
+    "test": "mocha src/tests/ --require @babel/register --timeout 1000 --exit",
     "dev-start": "nodemon --exec babel-node src/index.js",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",

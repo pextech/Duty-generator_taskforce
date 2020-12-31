@@ -1,75 +1,93 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-undef */
-import chai from 'chai';
+import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../index';
+
+const { users } = require('../models');
 
 chai.should();
 chai.use(chaiHttp);
 
 const validData = {
-  names: 'karyuriguri',
-  email: 'karyuriguri@gmail.com',
-  password: 'karyuriguri',
-};
-const invalidData = {
-  names: 'karyuriguri',
-  email: 'karyuriguri',
-  password: 'karyu',
+  name: 'test123',
+  email: 'test@gmail.com',
+  password: 'test123',
 };
 const invalidPassword = {
-  names: 'karyuriguri@gmail.cm',
-  email: 'karyuriguri',
-  password: 'karyu',
+  name: 'test123',
+  email: 'test@gmail.com',
+  password: 'test',
 };
 const invalidEmail = {
-  names: 'karyuriguri',
-  email: 'karyuriguri',
-  password: 'karyuririr',
+  name: 'test123',
+  email: 'test',
+  password: 'test123',
+};
+const invalidName = {
+  name: '',
+  email: 'test@gmail.com',
+  password: 'test123',
 };
 
 describe('Test user registration', () => {
-  it('It should not create user with invalid parameters', (done) => {
-    chai.request(app)
-      .post('/signUp').send(invalidData)
-      .end((err, response) => {
-        response.body.should.be.a('object');
-        response.body.should.have.property('status');
-        response.body.should.have.property('message');
-        done();
-      });
+  it('It should not create user when name is incorrect', async () => {
+    const res = await chai.request(app)
+      .post('/signUp').send(invalidName);
+    res.should.have.status(500);
+    res.body.should.be.a('object');
+    res.body.should.have.property('status');
+    res.body.should.have.property('message');
   });
-  it('It should not create user passwords is below 6 values', (done) => {
-    chai.request(app)
-      .post('/signUp').send(invalidPassword)
-      .end((err, response) => {
-        response.should.have.status(500);
-        response.body.should.be.a('object');
-        response.body.should.have.property('status');
-        response.body.should.have.property('message');
-        done();
-      });
+  it('It should not create user when password is below 6 or null', async () => {
+    const res = await chai.request(app)
+      .post('/signUp').send(invalidPassword);
+    res.should.have.status(500);
+    res.body.should.be.a('object');
+    res.body.should.have.property('status');
+    res.body.should.have.property('message');
   });
-  it('It should not create user when email is invalid', (done) => {
-    chai.request(app)
-      .post('/signUp').send(invalidEmail)
-      .end((err, response) => {
-        response.should.have.status(500);
-        response.body.should.be.a('object');
-        response.body.should.have.property('status');
-        response.body.should.have.property('message');
-        done();
-      });
+  it('It should not create user when email is invalid', async () => {
+    const res = await chai.request(app)
+      .post('/signUp').send(invalidEmail);
+    res.should.have.status(500);
+    res.body.should.be.a('object');
+    res.body.should.have.property('status');
+    res.body.should.have.property('message');
   });
-  it('It should create user', (done) => {
-    chai.request(app)
-      .post('/signUp').send(validData)
-      .end((err, response) => {
-        response.should.have.status(201);
-        response.body.should.be.a('object');
-        response.body.should.have.property('status');
-        response.body.should.have.property('message');
-        done();
-      });
+  it('should register user', async () => {
+    const res = await chai
+      .request(app)
+      .post('/signUp')
+      .send(validData);
+    res.should.have.status(201);
+    res.body.should.be.a('object');
+    res.body.should.have.property('status');
+    res.body.should.have.property('message');
+    users.destroy({
+      where: { email: validData.email },
+    });
+  });
+  it('should not register user who is already in the database', async () => {
+    const res = await chai
+      .request(app)
+      .post('/signUp')
+      .send(validData);
+    res.should.have.status(201);
+    res.body.should.be.a('object');
+    res.body.should.have.property('status');
+    res.body.should.have.property('message');
+
+    const res2 = await chai
+      .request(app)
+      .post('/signUp')
+      .send(validData);
+    res2.should.have.status(500);
+    res2.body.should.be.a('object');
+    res2.body.should.have.property('status');
+    res2.body.should.have.property('message');
+    users.destroy({
+      where: { email: validData.email },
+    });
   });
 });

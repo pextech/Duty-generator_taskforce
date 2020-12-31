@@ -16,8 +16,16 @@ let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
+  config.define = {
+    timestamps: true,
+    createdAt: 'createdat',
+    updatedAt: 'updatedat',
+  };
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
+// sequelize = new Sequelize(process.env.DATABASE_URL);
+
+sequelize.authenticate().then(() => { console.log('Connection has been established successfully.'); }).catch((error) => { console.error('Unable to connect to the database:', error); });
 
 fs
   .readdirSync(__dirname)
