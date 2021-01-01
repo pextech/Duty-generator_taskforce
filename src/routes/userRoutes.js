@@ -1,6 +1,6 @@
 /* eslint-disable prefer-destructuring */
 import express from 'express';
-import createUser from '../controllers/userController';
+import { createUser, userLogin } from '../controllers/userController';
 
 /**
  * @swagger
@@ -36,5 +36,5 @@ import createUser from '../controllers/userController';
 const router = express.Router();
 
 router.post('/signUp', createUser);
-
+router.post('/login', userLogin);
 export default router;

@@ -10,7 +10,8 @@
     "dev-start": "nodemon --exec babel-node src/index.js",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
-    "cover": "nyc npm run test"
+    "cover": "nyc --reporter=html --reporter=text npm test",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -25,12 +26,15 @@
   "homepage": "https://github.com/pextech/DutyGenerator#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
+    "coveralls": "^3.1.0",
     "dotenv": "^8.2.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^6.3.5",

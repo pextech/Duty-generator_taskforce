@@ -15,6 +15,16 @@ const validData = {
   email: 'test@gmail.com',
   password: 'test123',
 };
+const validLogin = {
+  name: 'shizzy',
+  email: 'shizzy@gmail.com',
+  password: 'shizzy',
+};
+const incorrectPasswordLogin = {
+  name: 'shizzy',
+  email: 'shizzy@gmail.com',
+  password: 'shizziii',
+};
 const invalidPassword = {
   name: 'test123',
   email: 'test@gmail.com',
@@ -90,5 +100,59 @@ describe('Test user registration', () => {
     users.destroy({
       where: { email: validData.email },
     });
+  });
+});
+
+describe('test user log in endpoint', () => {
+  it('should log a user in', async () => {
+    const res = await chai
+      .request(app)
+      .post('/login')
+      .send(validLogin);
+    res.should.have.status(200);
+    res.body.should.be.a('object');
+    res.body.should.have.property('status');
+    res.body.should.have.property('message');
+    res.body.should.have.property('token');
+  });
+  it('It should not log user in when password is below 6 or null', async () => {
+    const res = await chai.request(app)
+      .post('/login').send(invalidPassword);
+    res.should.have.status(500);
+    res.body.should.be.a('object');
+    res.body.should.have.property('status');
+    res.body.should.have.property('message');
+  });
+  it('It should not log user in when email is invalid', async () => {
+    const res = await chai.request(app)
+      .post('/login').send(invalidEmail);
+    res.should.have.status(500);
+    res.body.should.be.a('object');
+    res.body.should.have.property('status');
+    res.body.should.have.property('message');
+  });
+  it('It should not create user when password is below 6 or null', async () => {
+    const res = await chai.request(app)
+      .post('/signUp').send(invalidPassword);
+    res.should.have.status(500);
+    res.body.should.be.a('object');
+    res.body.should.have.property('status');
+    res.body.should.have.property('message');
+  });
+  it('only logs in only registered users', async () => {
+    const res = await chai.request(app)
+      .post('/login').send(validData);
+    res.should.have.status(500);
+    res.body.should.be.a('object');
+    res.body.should.have.property('status');
+    res.body.should.have.property('message');
+  });
+  it('should not log user in when password isnt matching', async () => {
+    const res = await chai.request(app)
+      .post('/login').send(incorrectPasswordLogin);
+    res.should.have.status(500);
+    res.body.should.be.a('object');
+    res.body.should.have.property('status');
+    res.body.should.have.property('message');
   });
 });
