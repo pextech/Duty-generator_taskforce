@@ -1,6 +1,8 @@
+/* eslint-disable max-len */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable consistent-return */
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const users = require('../models').users;
 
@@ -27,7 +29,7 @@ function isValidEmail(email) {
   const re = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
   return re.test(String(email).toLowerCase());
 }
-const createUser = async (req, res) => {
+export const createUser = async (req, res) => {
   if (!isValidName(req.body.name)) {
     return res.status(500).json({ status: 'error', message: 'check the inputted name please' });
   }
@@ -62,5 +64,32 @@ const createUser = async (req, res) => {
     }));
   }
 };
+export const userLogin = async (req, res) => {
+  if (!isValidEmail(req.body.email)) {
+    return res.status(500).json({ status: 'error', message: 'Email address not formed correctly.' });
+  } if (!isValidPassword(req.body.password)) {
+    return res.status(500).json({ status: 'error', message: 'Password must be 6 or more characters.' });
+  }
 
-export default createUser;
+  users.findOne({ where: { email: req.body.email } }).then((user) => {
+    if (user < 1) {
+      (res.status(500).json({ status: 500, message: 'authentication errored, make sure you have an account' }));
+    }
+    bcrypt.compare(req.body.password, user.password).then((result) => {
+      if (result) {
+        const token = jwt.sign({
+
+          email: req.body.email,
+          userId: user.id,
+
+        },
+        process.env.TOKEN,
+        { expiresIn: '1hr' });
+
+        (res.status(200).json({ status: 200, message: `user ${user.name} is logged in with below token`, token }));
+      } else {
+        (res.status(500).json({ status: 500, message: 'authentication errored, make sure your password is correct' }));
+      }
+    });
+  }).catch((err) => { res.status(500).json({ error: err }); });
+};

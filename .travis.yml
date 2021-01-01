@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - "stable"
+env:
+  - PORT=3000
+services:
+  - mongodb
+script:
+  - cd server/
+  - npm ci
+  - npm run cover
+notifications:
+  email: false
+after_success:
+  - npm run coverage
