@@ -6,7 +6,6 @@ env:
 services:
   - postgres
 script:
-  - cd server/
   - npm ci
   - npm run cover
 notifications:
