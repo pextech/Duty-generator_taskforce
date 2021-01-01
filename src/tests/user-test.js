@@ -155,4 +155,22 @@ describe('test user log in endpoint', () => {
     res.body.should.have.property('status');
     res.body.should.have.property('message');
   });
+  it('should log a user out', async () => {
+    const res = await chai
+      .request(app)
+      .post('/login')
+      .send(validLogin);
+    res.should.have.status(200);
+    res.body.should.be.a('object');
+    res.body.should.have.property('status');
+    res.body.should.have.property('message');
+    res.body.should.have.property('token');
+    console.log(res.body.token);
+
+    const response = await chai.request(app)
+      .get('/logout').set('authorization', `Bearer ${res.body.token}`);
+    response.should.have.status(200);
+    response.body.should.be.a('object');
+    response.body.should.have.property('message');
+  });
 });

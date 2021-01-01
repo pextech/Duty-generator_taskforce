@@ -1,6 +1,7 @@
 /* eslint-disable prefer-destructuring */
 import express from 'express';
-import { createUser, userLogin } from '../controllers/userController';
+import { createUser, userLogin, logout } from '../controllers/userController';
+import auth from '../config/auth';
 
 /**
  * @swagger
@@ -37,4 +38,5 @@ const router = express.Router();
 
 router.post('/signUp', createUser);
 router.post('/login', userLogin);
+router.get('/logout', auth, logout);
 export default router;

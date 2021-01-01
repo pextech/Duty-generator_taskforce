@@ -93,3 +93,8 @@ export const userLogin = async (req, res) => {
     });
   }).catch((err) => { res.status(500).json({ error: err }); });
 };
+
+export const logout = (req, res) => {
+  res.cookie('jwt', '', { maxAge: 1 });
+  res.status(200).json({ message: 'logged user out' });
+};
