@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-undef */
-require 'coveralls';
 
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
