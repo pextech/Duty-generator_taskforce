@@ -14,11 +14,34 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: dutydb
+          POSTGRES_USER: andela
+        ports:
+          - 5432:5432  
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+
     strategy:
       matrix:
         node-version: [10.x, 12.x, 14.x]
 
     steps:
+    - name: runing golnag-migrate
+      run: |
+       curl -L https://github.com/golang-migrate/migrate/releases/download/v4.14.1/migrate.linux-amd64.tar.gz | tar xvz 
+       sudo mv migrate.linux-amd64 usr/bin/migrate
+       which migrate 
+    - name: run migration
+      run: make migrateup 
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
