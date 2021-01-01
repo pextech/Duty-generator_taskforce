@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-undef */
+require 'coveralls';
+
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../index';
@@ -165,8 +167,6 @@ describe('test user log in endpoint', () => {
     res.body.should.have.property('status');
     res.body.should.have.property('message');
     res.body.should.have.property('token');
-    console.log(res.body.token);
-
     const response = await chai.request(app)
       .get('/logout').set('authorization', `Bearer ${res.body.token}`);
     response.should.have.status(200);
