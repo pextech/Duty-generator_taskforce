@@ -33,6 +33,58 @@ import auth from '../config/auth';
  *       409:
  *             description: The email is already in the system.
  * */
+/**
+ * @swagger
+ * /login:
+ *   post:
+ *     tags:
+ *       - User
+ *     name: login
+ *     summary: logs a new user in
+ *     consumes:
+ *       - application/json
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *                email:
+ *                 type: string
+ *                password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *             description: user logged in successfully.
+ *       400:
+ *             description: Bad request.
+ *       500:
+ *             description: The password is incorrect or user isnt registered
+ * */
+
+/**
+ * @swagger
+ * /logout:
+ *   post:
+ *     tags:
+ *       - User
+ *     name: logout
+ *     summary: logs a user out
+ *     consumes:
+ *       - application/json
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *     responses:
+ *       200:
+ *             description: user logged out successfully.
+ *       400:
+ *             description: Bad request.
+ *       500:
+ *             description: can't log user out.
+ * */
 
 const router = express.Router();
 
