@@ -1,33 +1,28 @@
-/* eslint-disable no-unused-vars */
 const {
   Model,
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class users extends Model {
+  class duties extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
-
-      users.hasMany(models.duties, {
+      duties.belongsTo(models.users, {
         foreignKey: 'dutyId',
-        as: 'duties',
+        onDelete: 'CASCADE',
       });
     }
   }
-  users.init({
+  duties.init({
     name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
+    content: DataTypes.STRING,
+    complete: DataTypes.BOOLEAN,
   }, {
     sequelize,
-    modelName: 'users',
-  }, {
-    timestamps: false,
+    modelName: 'duties',
   });
-  return users;
+  return duties;
 };
