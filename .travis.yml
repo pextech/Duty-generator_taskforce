@@ -4,7 +4,7 @@ node_js:
 env:
   - PORT=3000
 services:
-  - mongodb
+  - postgres
 script:
   - cd server/
   - npm ci
