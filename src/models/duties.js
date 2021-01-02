@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       duties.belongsTo(models.users, {
-        foreignKey: 'dutyId',
+        foreignKey: 'dutyid',
         onDelete: 'CASCADE',
       });
     }

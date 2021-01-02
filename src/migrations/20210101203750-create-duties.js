@@ -17,21 +17,21 @@ module.exports = {
       complete: {
         type: Sequelize.BOOLEAN,
       },
-      createdAt: {
+      createdat: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      updatedAt: {
+      updatedat: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      dutyId: {
+      dutyid: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
           model: 'users',
           key: 'id',
-          as: 'dutyId',
+          as: 'dutyid',
         },
       },
     });

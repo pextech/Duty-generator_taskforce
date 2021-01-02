@@ -3,11 +3,13 @@ import express from 'express';
 import Sequelize from 'sequelize';
 import documentation from './documentation';
 import user from './userRoutes';
+import duties from './dutyRoutes';
 
 const router = express.Router();
 
 router.use('/', documentation);
 router.use('/', user);
+router.use('/', duties);
 router.get('/', (req, res) => {
   res.status(200).json({ status: 200, message: 'Hey, you made it to my Duties generator app, have fun' });
 });
