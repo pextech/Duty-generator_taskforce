@@ -17,11 +17,11 @@ module.exports = {
       complete: {
         type: Sequelize.BOOLEAN,
       },
-      createdat: {
+      createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      updatedat: {
+      updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
       },
