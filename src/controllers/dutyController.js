@@ -107,10 +107,10 @@ export const clearDuty = async (req, res) => {
   const dutyid = user.id;
   const id = req.params.id;
   const duty = await duties.findOne({ where: { id, dutyid } });
-  const complete = duty.complete;
   if (duty < 1) {
     (res.status(500).json({ status: 500, message: 'authorisation denied.' }));
-  } if (complete === true) {
+  } const complete = duty.complete;
+  if (complete === true) {
     duties.destroy({ where: { id, complete: true } }).then(() => {
       res.status(201).json({ status: '200', message: ` deleted one duty by ${email}` });
     }).catch((err) => {
