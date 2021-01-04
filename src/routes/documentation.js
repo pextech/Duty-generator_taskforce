@@ -8,7 +8,7 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Mupenzi mybrand Api-documentation',
+      title: 'Duty generator Api-documentation',
       version: '0.1.0',
       description:
             'This a route endpoint that  documented my APi with Swagger',
@@ -20,7 +20,7 @@ const options = {
     },
     servers: [
       {
-        url: 'https://api-mybrand.herokuapp.com/',
+        url: 'https://dutygenerator.herokuapp.com/',
       },
     ],
     produces: ['application/json'],
