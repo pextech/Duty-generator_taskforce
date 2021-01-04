@@ -14,11 +14,11 @@
 
 ### Duty (task)
 
-- **POST /task:** Create a new Task
-- **GET /task/:blogID:** Fetch a single Task 
-- **GET /task:** Fetch all tasks
-- **PATCH /task:ID:** Update a single task
-- **DELETE /blog:blogdID:** Delete a task
+- **POST /duty:** Create a new Task
+- **GET /duty/:ID:** Fetch a single Task 
+- **GET /duty:** Fetch all tasks
+- **PATCH /duty:ID:** Update a single task
+- **DELETE /duty:ID:** Delete a task
 
 
 # Installation and Environment Setup
@@ -61,6 +61,7 @@ npm run dev-start
 
 - Server-Side Framework: **Node/Express**
 - Testing framework: **Mocha/Chai**
+- databse: **sequelize, postgres**
 
 # More Tools
 
