@@ -17,9 +17,8 @@ const validData = {
   password: 'test123',
 };
 const validLogin = {
-  name: 'shizzy',
-  email: 'shizzy@gmail.com',
-  password: 'shizzy',
+  email: 'belsebub2001@gmail.com',
+  password: 'belsebub',
 };
 const incorrectPasswordLogin = {
   name: 'shizzy',
