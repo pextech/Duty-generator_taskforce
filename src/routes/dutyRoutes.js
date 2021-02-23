@@ -7,7 +7,7 @@ import auth from '../config/auth';
 
 /**
  * @swagger
- * /duty:
+ * /duties:
  *   post:
  *     tags:
  *       - Duties
@@ -40,7 +40,7 @@ import auth from '../config/auth';
  * */
 /**
  * @swagger
- * /duty:
+ * /duties:
  *   get:
  *     tags:
  *       - Duties
@@ -63,7 +63,7 @@ import auth from '../config/auth';
  * */
 /**
  * @swagger
- * /duty/{id}:
+ * /duties/{id}:
  *   patch:
  *     tags:
  *       - Duties
@@ -96,7 +96,7 @@ import auth from '../config/auth';
  * */
 /**
  * @swagger
- * /duty/{id}:
+ * /duties/{id}:
  *   get:
  *     tags:
  *       - Duties
@@ -119,7 +119,7 @@ import auth from '../config/auth';
  * */
 /**
  * @swagger
- * /duty/{id}:
+ * /duties/{id}:
  *   delete:
  *     tags:
  *       - Duties
@@ -142,10 +142,10 @@ import auth from '../config/auth';
  * */
 const router = express.Router();
 
-router.post('/duty', auth, createDuty);
-router.get('/duty', auth, getDuties);
-router.patch('/duty/:id', auth, updateDuties);
-router.get('/duty/:id', auth, getOneDuty);
-router.delete('/duty/:id', auth, clearDuty);
+router.post('/duties', auth, createDuty);
+router.get('/duties', auth, getDuties);
+router.patch('/duties/:id', auth, updateDuties);
+router.get('/duties/:id', auth, getOneDuty);
+router.delete('/duties/:id', auth, clearDuty);
 
 export default router;

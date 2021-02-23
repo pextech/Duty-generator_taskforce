@@ -8,14 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      title: {
         type: Sequelize.STRING,
       },
-      content: {
+      description: {
         type: Sequelize.STRING,
       },
-      complete: {
-        type: Sequelize.BOOLEAN,
+      priority: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

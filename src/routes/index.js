@@ -7,10 +7,10 @@ import duties from './dutyRoutes';
 
 const router = express.Router();
 
-router.use('/', documentation);
-router.use('/', user);
-router.use('/', duties);
-router.get('/', (req, res) => {
+router.use('/api/v1/', documentation);
+router.use('/api/v1/', user);
+router.use('/api/v1/', duties);
+router.get('/api/v1/', (req, res) => {
   res.status(200).json({ status: 200, message: 'Hey, you made it to my Duties generator app, have fun' });
 });
 router.use((req, res) => {

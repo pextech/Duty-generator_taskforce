@@ -17,9 +17,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   duties.init({
-    name: DataTypes.STRING,
-    content: DataTypes.STRING,
-    complete: DataTypes.BOOLEAN,
+    title: DataTypes.STRING,
+    description: DataTypes.STRING,
+    priority: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'duties',

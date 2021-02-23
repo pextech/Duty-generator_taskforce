@@ -8,12 +8,15 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Duty generator Api-documentation',
+      title: 'Duty generator Api-documentation 😎🇷🇼',
       version: '0.1.0',
       description:
-            'This a route endpoint that  documented my APi with Swagger',
+            'This documentation contains a brief introduction of how Duty-generator app works, as suggeted by awesomity-labs (Task-force-challenge) 😎🇷🇼',
       contact: {
-        name: 'Mupenzi cedrick',
+        name: 'Mupenzi cedrick 😎🇷🇼',
+        phone: '+250780812252',
+        linkedin: 'https://www.linkedin.com/in/mupenzi-cedrick-10a158196',
+        github: 'https://github.com/pextech',
         url: 'https://pextech.github.io/MyRezume/html/',
         email: 'mcstain1639@gmail.com',
       },

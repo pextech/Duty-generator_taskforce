@@ -11,7 +11,7 @@ const chaiReq = chai.request(app);
 
 describe('API Root', () => {
   it('should display content', async () => {
-    const res = await chaiReq.get('/');
+    const res = await chaiReq.get('/api/v1/');
     expect(res.body).to.have.property('message');
     expect(res.body).to.have.status(200);
     expect(res.body).to.not.be.null;

@@ -1,6 +1,3 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
 name: Node.js CI
 
 on:
@@ -9,48 +6,36 @@ on:
   pull_request:
     branches: [ develop ]
 
+env:
+  DATABASE_URL: postgres://andela@127.0.0.1:5432/dutydb
+  ME: andela
+  DB_NAME: dutydb
+  TOKEN: secret
 jobs:
+
   build:
 
     runs-on: ubuntu-latest
-
     services:
       postgres:
-        image: postgres:12
+        image: pextech/dutygen:lastest
         env:
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: dutydb
-          POSTGRES_USER: andela
+          ME: andela
+          DB_NAME: dutydb
+          TOKEN: secret
         ports:
-          - 5432:5432  
+          - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-
-
     strategy:
       matrix:
         node-version: [10.x, 12.x, 14.x]
 
     steps:
-    - name: npm install, make test-coverage
-      run: |
-        npm install
-        npm run coverage
-
-    - name: Coveralls
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-    - name: runing golnag-migrate
-      run: |
-       curl -L https://github.com/golang-migrate/migrate/releases/download/v4.14.1/migrate.linux-amd64.tar.gz | tar xvz 
-       sudo mv migrate.linux-amd64 /usr/bin/migrate
-       which migrate 
-    - name: run migration
-      run: make migrateup 
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
@@ -58,4 +43,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm run build --if-present
+    - run: npm run migrate
     - run: npm test

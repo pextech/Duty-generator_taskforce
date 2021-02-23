@@ -17,8 +17,8 @@ const validData = {
   password: 'test123',
 };
 const validLogin = {
-  email: 'belsebub2001@gmail.com',
-  password: 'belsebub',
+  email: 'pextech1639@gmail.com',
+  password: 'Mc1639_1639',
 };
 const incorrectPasswordLogin = {
   name: 'shizzy',
@@ -44,7 +44,7 @@ const invalidName = {
 describe('Test user registration', () => {
   it('It should not create user when name is incorrect', async () => {
     const res = await chai.request(app)
-      .post('/signUp').send(invalidName);
+      .post('/api/v1/signUp').send(invalidName);
     res.should.have.status(500);
     res.body.should.be.a('object');
     res.body.should.have.property('status');
@@ -52,7 +52,7 @@ describe('Test user registration', () => {
   });
   it('It should not create user when password is below 6 or null', async () => {
     const res = await chai.request(app)
-      .post('/signUp').send(invalidPassword);
+      .post('/api/v1/signUp').send(invalidPassword);
     res.should.have.status(500);
     res.body.should.be.a('object');
     res.body.should.have.property('status');
@@ -60,7 +60,7 @@ describe('Test user registration', () => {
   });
   it('It should not create user when email is invalid', async () => {
     const res = await chai.request(app)
-      .post('/signUp').send(invalidEmail);
+      .post('/api/v1/signUp').send(invalidEmail);
     res.should.have.status(500);
     res.body.should.be.a('object');
     res.body.should.have.property('status');
@@ -69,7 +69,7 @@ describe('Test user registration', () => {
   it('should register user', async () => {
     const res = await chai
       .request(app)
-      .post('/signUp')
+      .post('/api/v1/signUp')
       .send(validData);
     res.should.have.status(201);
     res.body.should.be.a('object');
@@ -82,7 +82,7 @@ describe('Test user registration', () => {
   it('should not register user who is already in the database', async () => {
     const res = await chai
       .request(app)
-      .post('/signUp')
+      .post('/api/v1/signUp')
       .send(validData);
     res.should.have.status(201);
     res.body.should.be.a('object');
@@ -91,7 +91,7 @@ describe('Test user registration', () => {
 
     const res2 = await chai
       .request(app)
-      .post('/signUp')
+      .post('/api/v1/signUp')
       .send(validData);
     res2.should.have.status(500);
     res2.body.should.be.a('object');
@@ -107,7 +107,7 @@ describe('test user log in endpoint', () => {
   it('should log a user in', async () => {
     const res = await chai
       .request(app)
-      .post('/login')
+      .post('/api/v1/login')
       .send(validLogin);
     res.should.have.status(200);
     res.body.should.be.a('object');
@@ -117,7 +117,7 @@ describe('test user log in endpoint', () => {
   });
   it('It should not log user in when password is below 6 or null', async () => {
     const res = await chai.request(app)
-      .post('/login').send(invalidPassword);
+      .post('/api/v1/login').send(invalidPassword);
     res.should.have.status(500);
     res.body.should.be.a('object');
     res.body.should.have.property('status');
@@ -125,7 +125,7 @@ describe('test user log in endpoint', () => {
   });
   it('It should not log user in when email is invalid', async () => {
     const res = await chai.request(app)
-      .post('/login').send(invalidEmail);
+      .post('/api/v1/login').send(invalidEmail);
     res.should.have.status(500);
     res.body.should.be.a('object');
     res.body.should.have.property('status');
@@ -133,7 +133,7 @@ describe('test user log in endpoint', () => {
   });
   it('It should not create user when password is below 6 or null', async () => {
     const res = await chai.request(app)
-      .post('/signUp').send(invalidPassword);
+      .post('/api/v1/signUp').send(invalidPassword);
     res.should.have.status(500);
     res.body.should.be.a('object');
     res.body.should.have.property('status');
@@ -141,7 +141,7 @@ describe('test user log in endpoint', () => {
   });
   it('only logs in only registered users', async () => {
     const res = await chai.request(app)
-      .post('/login').send(validData);
+      .post('/api/v1/login').send(validData);
     res.should.have.status(500);
     res.body.should.be.a('object');
     res.body.should.have.property('status');
@@ -149,7 +149,7 @@ describe('test user log in endpoint', () => {
   });
   it('should not log user in when password isnt matching', async () => {
     const res = await chai.request(app)
-      .post('/login').send(incorrectPasswordLogin);
+      .post('/api/v1/login').send(incorrectPasswordLogin);
     res.should.have.status(500);
     res.body.should.be.a('object');
     res.body.should.have.property('status');
@@ -158,7 +158,7 @@ describe('test user log in endpoint', () => {
   it('should log a user out', async () => {
     const res = await chai
       .request(app)
-      .post('/login')
+      .post('/api/v1/login')
       .send(validLogin);
     res.should.have.status(200);
     res.body.should.be.a('object');
@@ -166,7 +166,7 @@ describe('test user log in endpoint', () => {
     res.body.should.have.property('message');
     res.body.should.have.property('token');
     const response = await chai.request(app)
-      .get('/logout').set('authorization', `Bearer ${res.body.token}`);
+      .get('/api/v1/logout').set('authorization', `Bearer ${res.body.token}`);
     response.should.have.status(200);
     response.body.should.be.a('object');
     response.body.should.have.property('message');
