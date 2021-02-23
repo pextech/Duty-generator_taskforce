@@ -75,9 +75,9 @@ describe('Test user registration', () => {
     res.body.should.be.a('object');
     res.body.should.have.property('status');
     res.body.should.have.property('message');
-    // users.destroy({
-    //   where: { email: validData.email },
-    // });
+    users.destroy({
+      where: { email: validData.email },
+    });
   });
   it('should not register user who is already in the database', async () => {
     const res = await chai

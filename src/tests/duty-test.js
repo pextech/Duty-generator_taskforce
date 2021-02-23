@@ -14,8 +14,8 @@ chai.should();
 chai.use(chaiHttp);
 
 const validLogin = {
-  email: 'test@gmail.com',
-  password: 'test123',
+  email: 'pextech1639@gmail.com',
+  password: 'Mc1639_1639',
 };
 const invalidLogin = {
   email: 'shizzii@gmail.com',
