@@ -11,6 +11,9 @@ env:
   ME: andela
   DB_NAME: dutydb
   TOKEN: secret
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: secret
+  POSTGRES_DB: postgres
 jobs:
 
   build:
@@ -18,12 +21,11 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: pextech/dutygen:lastest
+        image: postgres
         env:
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          ME: andela
-          DB_NAME: dutydb
-          TOKEN: secret
+          POSTGRES_DB: postgres
         ports:
           - 5432:5432
         options: >-
