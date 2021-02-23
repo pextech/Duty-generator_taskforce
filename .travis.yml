@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - 12.14.1
+before_install:
+  # - npm install sequelize-cli -g
+install:
+  - npm install
+before-script:
+  - npm add sequelize-cli
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database dutydb;' -U postgres
+script:
+  - npm run migrate
+  - npm test
+after_script:
+  - npm run coverage
+notifications:
+  email: false
+sudo: false
