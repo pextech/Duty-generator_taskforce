@@ -47,7 +47,7 @@ describe('test duty endpoints', () => {
       .request(app)
       .post('/api/v1/login')
       .send(validLogin);
-    res.should.have.status(500);
+    res.should.have.status(200);
     res.body.should.be.a('object');
     res.body.should.have.property('status');
     res.body.should.have.property('message');
@@ -86,7 +86,7 @@ describe('test duty endpoints', () => {
       .request(app)
       .post('/api/v1/login')
       .send(validLogin);
-    res.should.have.status(500);
+    res.should.have.status(200);
     res.body.should.be.a('object');
     res.body.should.have.property('status');
     res.body.should.have.property('message');

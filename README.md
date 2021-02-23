@@ -1,6 +1,6 @@
 <!-- ![Build Status](https://github.com/pextech/DutyGenerator/workflows/Node.js%20CI/badge.svg) -->
-[![Maintainability](https://api.codeclimate.com/v1/badges/4693888528779a8282ed/maintainability)](https://codeclimate.com/github/pextech/Duty-generator_taskforce/maintainability)
-[![Coverage Status](https://coveralls.io/repos/github/pextech/Duty-generator_taskforce/badge.svg?branch=develop)](https://coveralls.io/github/pextech/Duty-generator_taskforce?branch=develop)
+[![Maintainability](https://api.codeclimate.com/v1/badges/914387c533a83662f9ad/maintainability)](https://codeclimate.com/github/pextech/DutyGenerator/maintainability)
+[![Coverage Status](https://coveralls.io/repos/github/pextech/DutyGenerator/badge.svg?branch=develop)](https://coveralls.io/github/pextech/DutyGenerator?branch=develop)
 
 # DutyGenerator-Backend 😎🇷🇼 (Task-Force-Challenge)
 
