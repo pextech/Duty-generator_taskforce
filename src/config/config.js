@@ -3,7 +3,7 @@ import {} from 'dotenv/config';
 module.exports = {
   development: {
     username: process.env.ME,
-    password: null,
+    password: process.env.USERPWD,
     database: process.env.DB_NAME,
     host: process.env.HOST,
     port: process.env.DB_PORT,
