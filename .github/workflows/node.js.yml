@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres
+        image: pextech/dutygen:lastest
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
