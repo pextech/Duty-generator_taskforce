@@ -6,6 +6,8 @@
 
 ![Design preview for the Todo app coding challenge](desktop-preview.png)
 
+The Github-page Link of the hosted front-end app **[HERE](https://pextech.github.io/Front-end-dutygenerator/)**
+
 # API Endpoints included
 
 ### User
