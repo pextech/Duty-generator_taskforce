@@ -56,6 +56,7 @@ export const createDuty = async (req, res) => {
     if (!isValidName(req.body.title)) {
       return res.status(500).json({ status: 'error', message: 'check the inputted title please' });
     }
+
     // creating a duty
 
     duties.create({
@@ -86,7 +87,8 @@ export const createDuty = async (req, res) => {
 export const getDuties = async (req, res) => {
   const token = req.headers.authorization.split(' ')[1];
   const { email } = jwt.decode(token);
-  // const user = await users.findOne({ where: { email } });
+
+  // getting all duties
 
   users.findAll({
     include: [{
@@ -105,6 +107,7 @@ export const updateDuties = async (req, res) => {
   if (req.body.title || req.body.description || req.body.priority) {
     const token = req.headers.authorization.split(' ')[1];
     const { email } = jwt.decode(token);
+
     const user = await users.findOne({ where: { email } });
     const dutyid = user.id;
     const id = req.params.id;
@@ -136,7 +139,11 @@ export const getOneDuty = async (req, res) => {
   const user = await users.findOne({ where: { email } });
   const dutyid = user.id;
   const id = req.params.id;
+
+  // getting one duty
+
   const duty = await duties.findOne({ where: { id, dutyid } });
+
   if (duty < 1) {
     (res.status(500).json({ status: 500, message: 'there is no duty with such id' }));
   } else {
@@ -158,7 +165,7 @@ export const clearDuty = async (req, res) => {
   if (duty < 1) {
     (res.status(500).json({ status: 500, message: 'authorisation denied.' }));
   }
-  duties.destroy({ where: { id, complete: true } }).then(() => {
+  duties.destroy({ where: { id } }).then(() => {
     res.status(201).json({ status: '200', message: ` deleted one duty by ${email}` });
   }).catch((err) => {
     (res.status(500).json({ status: 500, err, message: 'authorisation denied.' }));
